@@ -11,6 +11,8 @@ class MenuController extends GetxController with GetSingleTickerProviderStateMix
   var counter='0'.obs;
   AppController appController = Get.find();
   List<MenuResponse> menuList= [];
+  RxList<int> qtyController = RxList<int>([]);
+  //var qtyController=[].obs;
 
 
   @override
@@ -40,6 +42,35 @@ class MenuController extends GetxController with GetSingleTickerProviderStateMix
 
   int get cartQuantity {
     return appController.cartItems.length;
+  }
+
+  List<CategoryDishes> _catDish=[];
+
+  getQuantity(){
+    print("ENTER QTY");
+    menuList.forEach((element) {
+      _catDish.addAll(element.tableMenuList![0].categoryDishes!);
+    });
+
+    if(appController.cartItems.isEmpty){
+      for(int i=0;i<_catDish.length;i++){
+        qtyController.add(0);
+      }
+    }
+    else{
+        for(int i=0;i<=_catDish.length;i++){
+          for(int j=0;j<appController.cartItems.length;j++){
+          if(_catDish[j].dishId == appController.cartItems[j].product.dishId)
+          {
+            print(appController.cartItems[j].quantity);
+            qtyController.add(appController.cartItems[j].quantity);
+          }
+          else{
+            qtyController.add(0);
+          }
+        }
+      }
+    }
   }
 
 }

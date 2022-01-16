@@ -25,42 +25,45 @@ class LoginPage extends StatelessWidget {
               width: 200,
               child: Image.asset(AppImages.firebase_logo),
             ),
-            InkWell(
-              onTap: (){
-                controller.loginWithGoogle();
-              },
-              child: Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.only(left: 50,right: 50,top: 30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: Colors.blue,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 35,
-                      width: 35,
-                      margin: EdgeInsets.only(left: 10),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          image: DecorationImage(image: AssetImage(AppImages.google_logo),fit: BoxFit.contain)
-                      ),
-
-                    ),
-                    Expanded(
-                      child:Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                          margin: EdgeInsets.only(right: 30),
-                          child: Text("Google",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),),
+            Visibility(
+              visible: controller.isLogIn?false:true,
+              child: InkWell(
+                onTap: (){
+                  controller.loginWithGoogle();
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(left: 50,right: 50,top: 30),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: Colors.blue,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 35,
+                        width: 35,
+                        margin: EdgeInsets.only(left: 10),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
+                            image: DecorationImage(image: AssetImage(AppImages.google_logo),fit: BoxFit.contain)
                         ),
+
                       ),
-                    )
-                  ],
+                      Expanded(
+                        child:Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                            margin: EdgeInsets.only(right: 30),
+                            child: Text("Google",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             )

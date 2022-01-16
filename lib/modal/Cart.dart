@@ -28,7 +28,7 @@ class CartItemModel {
 
   decrementQuantity() {
     if (this.quantity <= 0) {
-      this.quantity = 1;
+      this.quantity = 0;
     } else {
       this.quantity -= 1;
     }

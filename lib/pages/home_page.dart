@@ -32,13 +32,14 @@ class _HomePageState extends State<HomePage> {
   List<int> cartCounter=[];
   AppController appController = Get.find();
   final CartController controller = Get.put(CartController());
-  String counter="0";
+
   
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    cartCounter.add(0);
+    productController.getQuantity();
+
   }
 
 
@@ -71,21 +72,24 @@ class _HomePageState extends State<HomePage> {
                             alignment: Alignment.bottomCenter,
                             child: Icon(Icons.shopping_cart_rounded,
                                 color: Colors.blue, size: 25)),
-                        Positioned(
-                          top: 8,
-                          left: 0,
-                          right: 0,
-                          child: Container(
-                            height: 15,
-                            width: 15,
-                            margin: EdgeInsets.only(right: 10),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.red,
+                        Visibility(
+                          visible: productController.cartQuantity.toString()!='0'?true:false,
+                          child: Positioned(
+                            top: 8,
+                            left: 0,
+                            right: 0,
+                            child: Container(
+                              height: 15,
+                              width: 15,
+                              margin: EdgeInsets.only(right: 10),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                              child: Center(child: Text(productController.cartQuantity.toString()),
                             ),
-                            child: Center(child: Text(productController.cartQuantity.toString()),
                           ),
-                        ),
+                          ),
                         )
                       ],
                     ),
@@ -144,6 +148,8 @@ class _HomePageState extends State<HomePage> {
                     onTap: (){
                       LoginController loginController = Get.find<LoginController>();
                       loginController.logoutGoogle();
+                      loginController.removeUserSession();
+                      loginController.isLogIn=false;
                       Get.offAll(LoginPage());
 
                     },
@@ -176,6 +182,8 @@ class _HomePageState extends State<HomePage> {
       child: ListView.builder(
           itemCount: tab_content!.length,
           itemBuilder:(context,index){
+            if(appController.cartItems.contains(tab_content[index])){
+            }
             print(tab_content[index].dishName);
             return Container(
               margin: EdgeInsets.all(10.0),
@@ -261,12 +269,17 @@ class _HomePageState extends State<HomePage> {
                                     onTap:(){
                                       CategoryDishes categoryDishes=tab_content[index];
                                       addProduct(categoryDishes);
+
                                     },
                                     child: Icon(Icons.add,color: Colors.white,)),
-                                Obx(()=>Text("${appController.cartItems.value[index].quantity.toString()}",style: TextStyle(color: Colors.white),)),
+                                //Text("${productController.qtyController[index]}",style: TextStyle(color: Colors.white),),
+                               Obx(()=>Text("${appController.cartItems.value[index].quantity}",style: TextStyle(color: Colors.white),)),
                                 InkWell(
                                     onTap:(){
-                                      appController.cartItems.value[index].decrementQuantity();
+                                      if(appController.cartItems.value[index].quantity>0){
+                                        appController.cartItems.value[index].decrementQuantity();
+                                      }
+
                                     },
                                     child: Icon(Icons.remove,color: Colors.white,)),
                               ],
@@ -304,6 +317,7 @@ class _HomePageState extends State<HomePage> {
         return cartItem.product.dishId == categoryDishes.dishId;
       });
       cartItem.incrementQuantity();
+
     } catch (error) {
       appController.cartItems.add(CartItemModel(
         product: categoryDishes,
@@ -318,11 +332,12 @@ class _HomePageState extends State<HomePage> {
       CartItemModel cartItemModel= new CartItemModel(product: categoryDishes,quantity: 0);
       cartItems.add(cartItemModel);
     }
-
   }
+
+
+
+
 }
-
-
 
 
 
