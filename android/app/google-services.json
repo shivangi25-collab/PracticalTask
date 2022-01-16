@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "868041581284",
+    "project_id": "simbiotickpracticaltask",
+    "storage_bucket": "simbiotickpracticaltask.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:868041581284:android:192026888c6e389e7582f1",
+        "android_client_info": {
+          "package_name": "com.example.practical_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "868041581284-9an9ceb2r389qfqm7mv07jch8nia60l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.practical_task",
+            "certificate_hash": "03fd326ab1aede39d676d1eb9b662a24cf3170a3"
+          }
+        },
+        {
+          "client_id": "868041581284-d8279tmkpefj3o32hp6kfa3k7s00ik0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBV-sIrIkuRKOMhCtssjsslCA4IMrOcP3U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "868041581284-d8279tmkpefj3o32hp6kfa3k7s00ik0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
